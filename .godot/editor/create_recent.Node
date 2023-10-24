@@ -1,0 +1,10 @@
+Timer
+Control
+Label
+CollisionShape3D
+StaticBody3D
+MeshInstance3D
+WorldEnvironment
+DirectionalLight3D
+Camera3D
+RigidBody3D

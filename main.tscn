@@ -1,0 +1,213 @@
+[gd_scene load_steps=17 format=3 uid="uid://b6a3mh6aqgm0a"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_ko3jt"]
+[ext_resource type="Script" path="res://PlayerMovement.gd" id="1_sh2ef"]
+[ext_resource type="PackedScene" uid="uid://bfwxloe7fascu" path="res://tree.tscn" id="2_rnm7l"]
+[ext_resource type="Script" path="res://finish line.gd" id="4_gyat6"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_552b2"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_r1ydr"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_3bdf1"]
+friction = 0.2
+
+[sub_resource type="BoxMesh" id="BoxMesh_488of"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pd1f5"]
+albedo_color = Color(0.239216, 0.219608, 1, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_emq51"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_4khrd"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xodum"]
+albedo_color = Color(0.537255, 0.0705882, 0.0901961, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_6v061"]
+size = Vector3(0.40989, 1, 1)
+
+[sub_resource type="Environment" id="Environment_r51yf"]
+background_mode = 1
+background_color = Color(0.372549, 0.517647, 0.956863, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_t2pmc"]
+size = Vector3(20.778, 14.6878, 2.02799)
+
+[sub_resource type="LabelSettings" id="LabelSettings_oqsre"]
+font_size = 116
+
+[node name="Main" type="Node3D"]
+script = ExtResource("1_ko3jt")
+
+[node name="Ground" type="StaticBody3D" parent="."]
+transform = Transform3D(12, 0, 0, 0, -0.0431268, 18.5311, 0, 0.0156969, 50.9138, 0, -5.68301, -16.0012)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground"]
+mesh = SubResource("BoxMesh_552b2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
+shape = SubResource("BoxShape3D_r1ydr")
+
+[node name="Player" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.953175, 0.30242, 0, -0.30242, 0.953175, 0, 2.69518, 5.00504)
+physics_material_override = SubResource("PhysicsMaterial_3bdf1")
+max_contacts_reported = 5
+contact_monitor = true
+script = ExtResource("1_sh2ef")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Player"]
+transform = Transform3D(0.286334, 0, 0, 0, 0.455, 0, 0, 0, 0.256268, 0, 0, 0)
+mesh = SubResource("BoxMesh_488of")
+surface_material_override/0 = SubResource("StandardMaterial3D_pd1f5")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Player"]
+transform = Transform3D(0.325, 0, 0, 0, 0.325, 0, 0, 0, 0.325, 0, 0.350613, 0)
+mesh = SubResource("SphereMesh_emq51")
+surface_material_override/0 = SubResource("StandardMaterial3D_pd1f5")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Player"]
+transform = Transform3D(0.094557, 0, 0, 0, 0.0483867, 0, 0, 1.86265e-09, 1, 0.145148, -0.256797, 4.76837e-07)
+mesh = SubResource("BoxMesh_4khrd")
+surface_material_override/0 = SubResource("StandardMaterial3D_xodum")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Player"]
+transform = Transform3D(0.094557, 0, 0, 0, 0.0483867, 0, 0, 9.31323e-10, 1, -0.154211, -0.256797, 4.76837e-07)
+mesh = SubResource("BoxMesh_4khrd")
+surface_material_override/0 = SubResource("StandardMaterial3D_xodum")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0109497, 0, 0)
+shape = SubResource("BoxShape3D_6v061")
+
+[node name="Camera3D" type="Camera3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 0.944937, 0.327251, 0, -0.327251, 0.944937, -0.0215217, 0.937165, 1.66021)
+current = true
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.0536257, 0.998561, 0, -0.998561, -0.0536257, 0.272821, 4.44047, -0.10673)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_r51yf")
+
+[node name="Tree" parent="." instance=ExtResource("2_rnm7l")]
+transform = Transform3D(2.145, 0, 0, 0, 2.145, 0, 0, 0, 2.145, 0, -2.51602, -8.09101)
+
+[node name="Tree2" parent="." instance=ExtResource("2_rnm7l")]
+transform = Transform3D(2.145, 0, 0, 0, 2.145, 0, 0, 0, 2.145, 3.55375, -2.51602, -8.09101)
+
+[node name="Tree3" parent="." instance=ExtResource("2_rnm7l")]
+transform = Transform3D(2.145, 0, 0, 0, 2.145, 0, 0, 0, 2.145, -4.64819, -2.51602, -8.09101)
+
+[node name="Tree4" parent="." instance=ExtResource("2_rnm7l")]
+transform = Transform3D(2.145, 0, 0, 0, 2.145, 0, 0, 0, 2.145, -0.909081, -1.05799, -3.69266)
+
+[node name="Tree5" parent="." instance=ExtResource("2_rnm7l")]
+transform = Transform3D(2.145, 0, 0, 0, 2.145, 0, 0, 0, 2.145, 0.36561, -1.05799, -3.69266)
+
+[node name="Tree6" parent="." instance=ExtResource("2_rnm7l")]
+transform = Transform3D(2.145, 0, 0, 0, 2.145, 0, 0, 0, 2.145, 1.60593, -1.05799, -3.69266)
+
+[node name="Tree7" parent="." instance=ExtResource("2_rnm7l")]
+transform = Transform3D(2.145, 0, 0, 0, 2.145, 0, 0, 0, 2.145, 4.48288, -1.05799, -3.69266)
+
+[node name="Tree8" parent="." instance=ExtResource("2_rnm7l")]
+transform = Transform3D(2.145, 0, 0, 0, 2.145, 0, 0, 0, 2.145, 4.03831, -1.44233, -5.28518)
+
+[node name="Tree9" parent="." instance=ExtResource("2_rnm7l")]
+transform = Transform3D(2.145, 0, 0, 0, 2.145, 0, 0, 0, 2.145, 4.03831, -0.116623, -0.830986)
+
+[node name="Tree10" parent="." instance=ExtResource("2_rnm7l")]
+transform = Transform3D(2.145, 0, 0, 0, 2.145, 0, 0, 0, 2.145, -4.35198, 0.695663, 1.04454)
+
+[node name="Tree11" parent="." instance=ExtResource("2_rnm7l")]
+transform = Transform3D(2.145, 0, 0, 0, 2.145, 0, 0, 0, 2.145, -1.59204, 0.826167, 1.04454)
+
+[node name="Tree12" parent="." instance=ExtResource("2_rnm7l")]
+transform = Transform3D(2.145, 0, 0, 0, 2.145, 0, 0, 0, 2.145, -4.60105, -0.605415, -2.63757)
+
+[node name="Tree13" parent="." instance=ExtResource("2_rnm7l")]
+transform = Transform3D(2.145, 0, 0, 0, 2.145, 0, 0, 0, 2.145, 0.431676, -3.48681, -10.5231)
+
+[node name="Tree14" parent="." instance=ExtResource("2_rnm7l")]
+transform = Transform3D(2.145, 0, 0, 0, 2.145, 0, 0, 0, 2.145, -3.53718, -3.10096, -9.14239)
+
+[node name="Tree15" parent="." instance=ExtResource("2_rnm7l")]
+transform = Transform3D(2.145, 0, 0, 0, 2.145, 0, 0, 0, 2.145, -4.3075, -5.51145, -16.2667)
+
+[node name="Tree29" parent="." instance=ExtResource("2_rnm7l")]
+transform = Transform3D(2.145, 0, 0, 0, 2.145, 0, 0, 0, 2.145, -2.4923, -5.61454, -16.2667)
+
+[node name="Tree16" parent="." instance=ExtResource("2_rnm7l")]
+transform = Transform3D(2.145, 0, 0, 0, 2.145, 0, 0, 0, 2.145, 0.000412464, -4.89238, -14.6093)
+
+[node name="Tree17" parent="." instance=ExtResource("2_rnm7l")]
+transform = Transform3D(2.145, 0, 0, 0, 2.145, 0, 0, 0, 2.145, 3.41468, -6.55858, -18.7585)
+
+[node name="Tree18" parent="." instance=ExtResource("2_rnm7l")]
+transform = Transform3D(2.145, 0, 0, 0, 2.145, 0, 0, 0, 2.145, -0.635213, -6.68825, -19.9701)
+
+[node name="Tree19" parent="." instance=ExtResource("2_rnm7l")]
+transform = Transform3D(2.145, 0, 0, 0, 2.145, 0, 0, 0, 2.145, 1.06744, -6.80825, -19.9701)
+
+[node name="Tree20" parent="." instance=ExtResource("2_rnm7l")]
+transform = Transform3D(2.145, 0, 0, 0, 2.145, 0, 0, 0, 2.145, -4.47197, -7.89578, -23.1442)
+
+[node name="Tree21" parent="." instance=ExtResource("2_rnm7l")]
+transform = Transform3D(2.145, 0, 0, 0, 2.145, 0, 0, 0, 2.145, -1.5326, -7.89578, -23.0064)
+
+[node name="Tree22" parent="." instance=ExtResource("2_rnm7l")]
+transform = Transform3D(2.145, 0, 0, 0, 2.145, 0, 0, 0, 2.145, 0.490232, -10.1752, -29.1185)
+
+[node name="Tree23" parent="." instance=ExtResource("2_rnm7l")]
+transform = Transform3D(2.145, 0, 0, 0, 2.145, 0, 0, 0, 2.145, 4.36916, -10.0793, -29.1185)
+
+[node name="Tree24" parent="." instance=ExtResource("2_rnm7l")]
+transform = Transform3D(2.145, 0, 0, 0, 2.145, 0, 0, 0, 2.145, -3.17378, -9.71355, -27.7167)
+
+[node name="Tree25" parent="." instance=ExtResource("2_rnm7l")]
+transform = Transform3D(2.145, 0, 0, 0, 2.145, 0, 0, 0, 2.145, -1.40368, -11.2157, -31.8847)
+
+[node name="Tree26" parent="." instance=ExtResource("2_rnm7l")]
+transform = Transform3D(2.145, 0, 0, 0, 2.145, 0, 0, 0, 2.145, 2.30348, -13.4125, -37.817)
+
+[node name="Tree27" parent="." instance=ExtResource("2_rnm7l")]
+transform = Transform3D(2.145, 0, 0, 0, 2.145, 0, 0, 0, 2.145, -3.02615, -13.4124, -38.0281)
+
+[node name="Tree28" parent="." instance=ExtResource("2_rnm7l")]
+transform = Transform3D(2.145, 0, 0, 0, 2.145, 0, 0, 0, 2.145, 1.62418, -11.4445, -32.6568)
+
+[node name="finish line" type="StaticBody3D" parent="." node_paths=PackedStringArray("control_node") groups=["finish"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.263956, -15.5331, -42.32)
+script = ExtResource("4_gyat6")
+control_node = NodePath("Control")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="finish line" groups=["finish"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.346472, 0, 0)
+shape = SubResource("BoxShape3D_t2pmc")
+
+[node name="Control" type="Control" parent="finish line"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="finish line/Control"]
+offset_left = 165.0
+offset_top = 145.0
+offset_right = 935.0
+offset_bottom = 429.0
+text = "YOU WIN! "
+label_settings = SubResource("LabelSettings_oqsre")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DelayTimer" type="Timer" parent="."]
+
+[connection signal="body_entered" from="Player" to="Player" method="_on_body_entered"]
+[connection signal="tree_entered" from="finish line" to="finish line" method="_on_tree_entered"]
+[connection signal="draw" from="finish line/Control" to="." method="_on_control_draw"]
+[connection signal="timeout" from="DelayTimer" to="." method="_on_timer_node_timeout"]
+[connection signal="timeout" from="DelayTimer" to="Player" method="_on_delay_timer_timeout"]
+[connection signal="timeout" from="DelayTimer" to="Player" method="_on_timer_node_timeout"]
